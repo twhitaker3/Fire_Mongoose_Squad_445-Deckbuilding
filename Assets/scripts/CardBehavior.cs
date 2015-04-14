@@ -10,6 +10,9 @@ public class CardBehavior : MonoBehaviour {
 	public Sprite[] faces;		//Array of all frontside images for a card
 
 	SpriteRenderer spriteRenderer; //For drawing the card
+	float x; //used for drag/drop
+	float y; //used for drag/drop
+
 	// Use this for initialization
 	void Start () {
 		spriteRenderer = GetComponent<SpriteRenderer> ();
@@ -17,6 +20,8 @@ public class CardBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		x = Input.mousePosition.x;	//used for drag/drop
+		y = Input.mousePosition.y;	//used for drag/drop
 	
 	}
 	//Change the side of the card showing
@@ -40,5 +45,9 @@ public class CardBehavior : MonoBehaviour {
 		case 1:
 			break;
 		}
+	}
+	public void onMouseDrag(){
+		transform.position = Camera.main.ScreenToWorldPoint(new Vector3(x,y,10.0f)); //nonfunctional currently
+			//should be able to drag/drop
 	}
 }
