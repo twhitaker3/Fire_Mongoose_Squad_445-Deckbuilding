@@ -16,24 +16,11 @@ public class PlayerDiscardBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		for (int i = 0; i < length; i++) {
-			//print ("Update");
-			CardBehavior c = cards[i].GetComponent<CardBehavior>();
-			switch(c.state){
-			case 3:		//Discard State
-				break;
-			case 0:		//Hand State
-				break;
-			case 1:		//Deck State
-				break;
-			case 2:		//Played State
-				break;
-			}
-		}
+	
 	}
 	public void AddCard(GameObject card){
 		if (length >= cards.Length) {
-			print ("Discard is full");
+			print ("Deck is full");
 			return;
 		}
 		else {

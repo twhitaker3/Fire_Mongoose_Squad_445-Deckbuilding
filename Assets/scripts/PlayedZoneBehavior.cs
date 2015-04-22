@@ -27,26 +27,14 @@ public class PlayedZoneBehavior : MonoBehaviour {
 				break;
 			case 0:		//Hand State
 				break;
-			case 3:		//Discard State
-				PlayerDiscardBehavior d = player_discard.GetComponent<PlayerDiscardBehavior>();
-				d.AddCard(cards[i]);
-				for(int j = i+1; j < length; j++){
-					cards[j-1] = cards[j];
-				}
-				length--;
-				cards[length] = null;
-				i--;
-				
-				Transform t1 = c.GetComponent<Transform>();
-				t1.position = d.GetComponent<Transform>().position;
-				break;			
+			
 			}
 		}
 	}
 
 	public void AddCard(GameObject card){
 		if (length >= cards.Length) {
-			print ("Play Zone is full");
+			print ("Deck is full");
 			return;
 		}
 		else {

@@ -5,20 +5,13 @@ public class PlayerDeckBehavior : MonoBehaviour {
 
 	public GameObject[] cards;
 	public int length;
-	
 	//Variables for other game entities
 	public GameObject player_hand;
 	public GameObject played_zone;
 	public GameObject player_discard;
 	// Use this for initialization
 	void Start () {
-		Shuffle ();
-		for (int i = 0; i < length; i++) {
-			CardBehavior c = cards[i].GetComponent<CardBehavior>();
-			Transform t1 = c.GetComponent<Transform>();
-			Vector2 vec = new Vector2(GetComponent<Transform>().position.x, GetComponent<Transform>().position.y);
-			t1.position = vec;
-		}
+	
 	}
 	
 	// Update is called once per frame
@@ -31,8 +24,10 @@ public class PlayerDeckBehavior : MonoBehaviour {
 			case 1:		//Deck State
 				break;
 			case 0:		//Hand State
+				break;
+			case 2:		//Played State
 				c.ShowFront();
-				PlayerHandBehavior z = player_hand.GetComponent<PlayerHandBehavior>();
+				PlayedZoneBehavior z = played_zone.GetComponent<PlayedZoneBehavior>();
 				z.AddCard(cards[i]);
 				for(int j = i+1; j < length; j++){
 					cards[j-1] = cards[j];
@@ -42,11 +37,7 @@ public class PlayerDeckBehavior : MonoBehaviour {
 				i--;
 				
 				Transform t2 = c.GetComponent<Transform>();
-				Vector2 vec= z.GetComponent<Transform>().position;
-				vec.x = vec.x + (z.length-1)*3;
-				t2.position = vec;
-				break;
-			case 2:		//Played State
+				t2.position = z.GetComponent<Transform>().position;
 				break;
 			}
 		}
@@ -61,14 +52,6 @@ public class PlayerDeckBehavior : MonoBehaviour {
 			cards[length] = card;
 			length++;
 
-		}
-	}
-	public void Shuffle(){
-		for (int i = 0; i < length; i++) {
-			int r = i + (int)(Random.value * (length - i));
-			GameObject t = cards[r];
-			cards[r] = cards[i];
-			cards[i] = t;
 		}
 	}
 }

@@ -11,13 +11,7 @@ public class PlayerHandBehavior : MonoBehaviour {
 	public GameObject player_discard;
 	// Use this for initialization
 	void Start () {
-		for (int i = 0; i < length; i++) {
-			CardBehavior c = cards[i].GetComponent<CardBehavior>();
-			Transform t1 = c.GetComponent<Transform>();
-			Vector2 vec = GetComponent<Transform>().position;
-			vec.x = vec.x + i*3;
-			t1.position = vec;
-		}
+
 	}
 	
 	// Update is called once per frame
@@ -29,6 +23,7 @@ public class PlayerHandBehavior : MonoBehaviour {
 			CardBehavior c = cards[i].GetComponent<CardBehavior>();
 			switch(c.state){
 			case 0:		//Hand State
+				c.ShowFront();
 				break;
 			case 1:		//Deck State
 				c.ShowBack();
@@ -45,7 +40,6 @@ public class PlayerHandBehavior : MonoBehaviour {
 				t1.position = d.GetComponent<Transform>().position;
 				break;
 			case 2:		//Played State
-				c.ShowFront();
 				PlayedZoneBehavior z = played_zone.GetComponent<PlayedZoneBehavior>();
 				z.AddCard(cards[i]);
 				for(int j = i+1; j < length; j++){
@@ -56,24 +50,13 @@ public class PlayerHandBehavior : MonoBehaviour {
 				i--;
 				
 				Transform t2 = c.GetComponent<Transform>();
-				Vector2 vec= z.GetComponent<Transform>().position;
-				vec.x = vec.x + (z.length-1)*3;
-				t2.position = vec;
-				break;
-			case 3:
+				t2.position = z.GetComponent<Transform>().position;
 				break;
 			}
 		}
 	}
-	public void AddCard(GameObject card){
-		if (length >= cards.Length) {
-			print ("Hand is full");
-			return;
-		}
-		else {
-			cards[length] = card;
-			length++;
-			
-		}
+
+	public void addCard(GameObject card){
+
 	}
 }
