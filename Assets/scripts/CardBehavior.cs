@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CardBehavior : MonoBehaviour {
 
-	public int state; 			//State 0- Player Hand, State 1- Deck, State 2- PlayedZone, 
+	public int state; 			//State 0- Player Hand, State 1- Deck, State 2- PlayedZone, State 3- Discard, State 4- Main Deck, State 5-Line Up
 	public bool face_down; 		//0 for face up card, 1 for face down card
 	public int index; 			//Index in the faces array
 	public Sprite back_face;	//Backside image
@@ -38,12 +38,21 @@ public class CardBehavior : MonoBehaviour {
 		print ("Clicked");
 		switch (state) {
 		case 0:		//Hand State
-			state = 1;
-			break;
-		case 1:		//Deck State
 			state = 2;
 			break;
+		case 1:		//Deck State
+			state = 0;
+			break;
 		case 2:		//Played State
+			state = 3;
+			break;
+		case 3:		//Discard State
+			break;
+		case 4:		//Main Deck State
+			state = 5;
+			break;
+		case 5:		//Line Up State
+			state = 3;
 			break;
 		}
 	}
