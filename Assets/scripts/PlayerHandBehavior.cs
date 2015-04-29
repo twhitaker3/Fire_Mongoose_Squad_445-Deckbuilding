@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerHandBehavior : MonoBehaviour {
 
-	public GameObject[] cards; 	//cards in the hand
+	public List<GameObject>cards; 	//cards in the hand
 	public int length;		//size of the hand
 	//Variables for other game entities
 	public GameObject player_deck;
@@ -25,7 +25,7 @@ public class PlayerHandBehavior : MonoBehaviour {
 	// A changed state means the card needs to be removed from this entities' list, added to the new entity, and the sprite must be moved
 	void Update () {
 		for (int i = 0; i < length; i++) {
-			//print ("Update");
+			//print ("i = " + i);
 			CardBehavior c = cards[i].GetComponent<CardBehavior>();
 			switch(c.state){
 			case 0:		//Hand State
@@ -34,11 +34,8 @@ public class PlayerHandBehavior : MonoBehaviour {
 				c.ShowBack();
 				PlayerDeckBehavior d = player_deck.GetComponent<PlayerDeckBehavior>();
 				d.AddCard(cards[i]);
-				for(int j = i+1; j < length; j++){
-					cards[j-1] = cards[j];
-				}
+				cards.RemoveAt(i);
 				length--;
-				cards[length] = null;
 				i--;
 
 				Transform t1 = c.GetComponent<Transform>();
@@ -48,11 +45,8 @@ public class PlayerHandBehavior : MonoBehaviour {
 				c.ShowFront();
 				PlayedZoneBehavior z = played_zone.GetComponent<PlayedZoneBehavior>();
 				z.AddCard(cards[i]);
-				for(int j = i+1; j < length; j++){
-					cards[j-1] = cards[j];
-				}
+				cards.RemoveAt(i);
 				length--;
-				cards[length] = null;
 				i--;
 				
 				Transform t2 = c.GetComponent<Transform>();
@@ -66,14 +60,7 @@ public class PlayerHandBehavior : MonoBehaviour {
 		}
 	}
 	public void AddCard(GameObject card){
-		if (length >= cards.Length) {
-			print ("Hand is full");
-			return;
-		}
-		else {
-			cards[length] = card;
-			length++;
-			
-		}
+		cards.Add(card);
+		length++;
 	}
 }

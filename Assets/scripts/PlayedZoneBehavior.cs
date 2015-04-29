@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class PlayedZoneBehavior : MonoBehaviour {
 
-	public GameObject[] cards;
+	public List<GameObject> cards;
 	public int length;
 	//Variables for other game entities
 	public GameObject player_deck;
@@ -30,11 +30,8 @@ public class PlayedZoneBehavior : MonoBehaviour {
 			case 3:		//Discard State
 				PlayerDiscardBehavior d = player_discard.GetComponent<PlayerDiscardBehavior>();
 				d.AddCard(cards[i]);
-				for(int j = i+1; j < length; j++){
-					cards[j-1] = cards[j];
-				}
+				cards.RemoveAt(i);
 				length--;
-				cards[length] = null;
 				i--;
 				
 				Transform t1 = c.GetComponent<Transform>();
@@ -45,14 +42,7 @@ public class PlayedZoneBehavior : MonoBehaviour {
 	}
 
 	public void AddCard(GameObject card){
-		if (length >= cards.Length) {
-			print ("Play Zone is full");
-			return;
-		}
-		else {
-			cards[length] = card;
-			length++;
-			
-		}
+		cards.Add(card);
+		length++;
 	}
 }

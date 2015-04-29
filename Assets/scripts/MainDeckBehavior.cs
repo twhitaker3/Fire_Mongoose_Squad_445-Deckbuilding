@@ -1,15 +1,21 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class MainDeckBehavior : MonoBehaviour {
 
-	public GameObject[] cards;
+	public List<GameObject> cards;
 	public int length;
 	//Variables for other game entries
 	public GameObject line_up;
 	// Use this for initialization
 	void Start () {
-	
+		Shuffle ();
+		for (int i = 0; i < length; i++) {
+			CardBehavior c = cards[i].GetComponent<CardBehavior>();
+			Transform t1 = c.GetComponent<Transform>();
+			Vector2 vec = new Vector2(GetComponent<Transform>().position.x, GetComponent<Transform>().position.y);
+			t1.position = vec;
+		}
 	}
 	
 	// Update is called once per frame
@@ -32,11 +38,8 @@ public class MainDeckBehavior : MonoBehaviour {
 				c.ShowFront();
 				LineUpBehavior z = line_up.GetComponent<LineUpBehavior>();
 				z.AddCard(cards[i]);
-				for(int j = i+1; j < length; j++){
-					cards[j-1] = cards[j];
-				}
+				cards.RemoveAt(i);
 				length--;
-				cards[length] = null;
 				i--;
 				
 				Transform t2 = c.GetComponent<Transform>();
@@ -48,14 +51,15 @@ public class MainDeckBehavior : MonoBehaviour {
 		}
 	}
 	public void AddCard(GameObject card){
-		if (length >= cards.Length) {
-			print ("Deck is full");
-			return;
-		}
-		else {
-			cards[length] = card;
-			length++;
-			
+		cards.Add(card);
+		length++;
+	}
+	public void Shuffle(){
+		for (int i = 0; i < length; i++) {
+			int r = i + (int)(Random.value * (length - i));
+			GameObject t = cards[r];
+			cards[r] = cards[i];
+			cards[i] = t;
 		}
 	}
 }

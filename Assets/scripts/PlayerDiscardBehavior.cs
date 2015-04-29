@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerDiscardBehavior : MonoBehaviour {
 
-	public GameObject[] cards;
+	public List<GameObject> cards;
 	public int length;
 	//Variables for other game entities
 	public GameObject player_deck;
@@ -32,14 +32,7 @@ public class PlayerDiscardBehavior : MonoBehaviour {
 		}
 	}
 	public void AddCard(GameObject card){
-		if (length >= cards.Length) {
-			print ("Discard is full");
-			return;
-		}
-		else {
-			cards[length] = card;
-			length++;
-			
-		}
+		cards.Add(card);
+		length++;
 	}
 }
