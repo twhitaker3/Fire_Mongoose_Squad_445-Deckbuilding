@@ -72,11 +72,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c135a341a48da2649889e1096a498978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 1
-  face_down: 1
-  index: 0
+  state: 5
+  face_down: 0
   back_face: {fileID: 21300000, guid: 1821c3195cb36b94fa982d8c09b4407e, type: 3}
-  faces: []
+  front_face: {fileID: 21300000, guid: 18c213b11edbc9446b84dc6f2aa51e8c, type: 3}
 --- !u!212 &21263152
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -11,11 +11,12 @@ public class VillainDeckBehavior : MonoBehaviour {
 		Shuffle ();
 		for (int i = 0; i < length; i++) {
 			CardBehavior c = cards[i].GetComponent<CardBehavior>();
-			c.ShowFront();
+			c.ShowBack();
 			Transform t1 = c.GetComponent<Transform>();
 			Vector2 vec = new Vector2(GetComponent<Transform>().position.x, GetComponent<Transform>().position.y);
 			t1.position = vec;
 		}
+		NextVillain ();
 	}
 	
 	// Update is called once per frame
@@ -32,9 +33,8 @@ public class VillainDeckBehavior : MonoBehaviour {
 				cards.RemoveAt(i);
 				length--;
 				i--;
-				
-				Transform t1 = c.GetComponent<Transform>();
-				t1.position = d.GetComponent<Transform>().position;
+
+				NextVillain();
 				break;
 			}
 		}
@@ -46,5 +46,14 @@ public class VillainDeckBehavior : MonoBehaviour {
 			cards[r] = cards[i];
 			cards[i] = t;
 		}
+	}
+	public void NextVillain(){
+		if (length == 0)
+			return;
+		Transform t = cards [length - 1].GetComponent<Transform> ();
+		Vector2 vec = new Vector2(GetComponent<Transform>().position.x-3, GetComponent<Transform>().position.y);
+		t.position = vec;
+		cards [length - 1].GetComponent<CardBehavior> ().ShowFront ();
+		cards [length - 1].GetComponent<CardBehavior> ().state = 7;
 	}
 }

@@ -15,13 +15,13 @@ public class LineUpBehavior : MonoBehaviour {
 		for (int i = 0; i < kicks.Count; i++) {
 			CardBehavior k = kicks[i].GetComponent<CardBehavior>();
 			Transform t1 = k.GetComponent<Transform>();
-			Vector2 vec = new Vector2(GetComponent<Transform>().position.x, GetComponent<Transform>().position.y+4);
+			Vector2 vec = new Vector2(GetComponent<Transform>().position.x-3, GetComponent<Transform>().position.y+4);
 			t1.position = vec;
 		}
 		for (int i = 0; i < weaknesses.Count; i++) {
-			CardBehavior w = kicks[i].GetComponent<CardBehavior>();
+			CardBehavior w = weaknesses[i].GetComponent<CardBehavior>();
 			Transform t1 = w.GetComponent<Transform>();
-			Vector2 vec = new Vector2(GetComponent<Transform>().position.x-3, GetComponent<Transform>().position.y+4);
+			Vector2 vec = new Vector2(GetComponent<Transform>().position.x-6, GetComponent<Transform>().position.y+4);
 			t1.position = vec;
 		}
 	}
@@ -42,7 +42,9 @@ public class LineUpBehavior : MonoBehaviour {
 				i--;
 				
 				Transform t1 = c.GetComponent<Transform>();
-				t1.position = d.GetComponent<Transform>().position;
+				Vector3 vec = new Vector3(d.GetComponent<Transform>().position.x, d.GetComponent<Transform>().position.y,(float)(d.length *-.01));
+                t1.position = vec;
+				FixSprites();
 				break;
 			}
 		}
@@ -54,7 +56,7 @@ public class LineUpBehavior : MonoBehaviour {
 				break;
 			case 3:		//Discard State
 				PlayerDiscardBehavior d = player_discard.GetComponent<PlayerDiscardBehavior>();
-				d.AddCard(cards[i]);
+				d.AddCard(kicks[i]);
 				kicks.RemoveAt(i);
 				i--;
 				
@@ -71,18 +73,27 @@ public class LineUpBehavior : MonoBehaviour {
 				break;
 			case 3:		//Discard State
 				PlayerDiscardBehavior d = player_discard.GetComponent<PlayerDiscardBehavior>();
-				d.AddCard(cards[i]);
+				d.AddCard(weaknesses[i]);
 				weaknesses.RemoveAt(i);
 				i--;
-				
-				Transform t1 = c.GetComponent<Transform>();
-				t1.position = d.GetComponent<Transform>().position;
 				break;
 			}
+		}
+	}
+	public void FixSprites(){
+		for (int i = 0; i < length; i++) {
+			Transform t = cards[i].GetComponent<Transform>();
+			Vector2 vec = GetComponent<Transform>().position;
+			vec.x = vec.x + (i)*3;
+			t.position = vec;
 		}
 	}
 	public void AddCard(GameObject card){
 		cards.Add(card);
 		length++;
+		Transform t = card.GetComponent<Transform>();
+		Vector2 vec= GetComponent<Transform>().position;
+		vec.x = vec.x + (length-1)*3;
+		t.position = vec;
 	}
 }

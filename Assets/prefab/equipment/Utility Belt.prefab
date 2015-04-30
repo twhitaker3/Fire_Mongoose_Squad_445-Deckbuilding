@@ -1,89 +1,88 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &146634
+--- !u!1 &143444
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 408818}
-  - 212: {fileID: 21220432}
-  - 61: {fileID: 6126224}
-  - 114: {fileID: 11437124}
-  - 114: {fileID: 11418562}
+  - 4: {fileID: 412456}
+  - 212: {fileID: 21201734}
+  - 61: {fileID: 6185370}
+  - 114: {fileID: 11444804}
+  - 114: {fileID: 11412370}
   m_Layer: 0
-  m_Name: The Bat-Signal 1
+  m_Name: Utility Belt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &408818
+--- !u!4 &412456
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 146634}
+  m_GameObject: {fileID: 143444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -23.4400005, y: -6.94000006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!61 &6126224
+--- !u!61 &6185370
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 146634}
+  m_GameObject: {fileID: 143444}
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 2.76999998, y: 3.82999992}
---- !u!114 &11418562
+  m_Size: {x: 2.76999998, y: 3.86999989}
+--- !u!114 &11412370
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 146634}
+  m_GameObject: {fileID: 143444}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0bbe5cc7c3296d4ab725626921386f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   power: 2
-  victoryPoints: 1
-  cost: 4
-  cardName: The Cape and Cowl
+  victoryPoints: 0
+  cost: 5
+  cardName: Utility Belt
   type: Equipment
-  gameText: '+2 Power. DEFENSE: You may discard this card to avoid an ATTACK, if you
-    do, draw two cards.'
---- !u!114 &11437124
+  gameText: At the end of the game, if you have four or more other Equipment in your
+    deck, this card is worth 5 VPs
+--- !u!114 &11444804
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 146634}
+  m_GameObject: {fileID: 143444}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c135a341a48da2649889e1096a498978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 1
-  face_down: 1
-  index: 0
-  back_face: {fileID: 21300000, guid: 1821c3195cb36b94fa982d8c09b4407e, type: 3}
-  faces: []
---- !u!212 &21220432
+  state: 0
+  face_down: 0
+  back_face: {fileID: 21300000, guid: 58dad6e3d0385b44da8233806fdc2630, type: 3}
+  front_face: {fileID: 21300000, guid: 36431619d352bf1488d0884f49f2c681, type: 3}
+--- !u!212 &21201734
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 146634}
+  m_GameObject: {fileID: 143444}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -102,7 +101,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8707dec938834924694121e8e1ad67d1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2cb3970905465f54f817a43f9a58665f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -113,5 +112,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 146634}
+  m_RootGameObject: {fileID: 143444}
   m_IsPrefabParent: 1

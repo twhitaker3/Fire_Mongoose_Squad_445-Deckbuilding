@@ -3,11 +3,10 @@ using System.Collections;
 
 public class CardBehavior : MonoBehaviour {
 
-	public int state; 			//State 0- Player Hand, State 1- Deck, State 2- PlayedZone, State 3- Discard, State 4- Main Deck, State 5-Line Up, State 6- VillianDeck
+	public int state; 			//State 0- Player Hand, State 1- Deck, State 2- PlayedZone, State 3- Discard, State 4- Main Deck, State 5-Line Up, State 6- VillianDeck, State 7- Active Villian
 	public bool face_down; 		//0 for face up card, 1 for face down card
-	public int index; 			//Index in the faces array
 	public Sprite back_face;	//Backside image
-	public Sprite[] faces;		//Array of all frontside images for a card
+	public Sprite front_face;		//Array of all frontside images for a card
 
 	SpriteRenderer spriteRenderer; //For drawing the card
 	float x; //used for drag/drop
@@ -31,7 +30,7 @@ public class CardBehavior : MonoBehaviour {
 	}
 	public void ShowFront(){
 		face_down = false;
-		spriteRenderer.sprite = faces [index];
+		spriteRenderer.sprite = front_face;
 	}
 	//Change the state of the card based on clicks
 	public void OnMouseDown(){
@@ -47,6 +46,7 @@ public class CardBehavior : MonoBehaviour {
 			state = 3;
 			break;
 		case 3:		//Discard State
+			state = 1;
 			break;
 		case 4:		//Main Deck State
 			state = 5;
@@ -54,7 +54,9 @@ public class CardBehavior : MonoBehaviour {
 		case 5:		//Line Up State
 			state = 3;
 			break;
-		case 6:		//Villian State
+		case 6:		//Villian Deck State
+			break;
+		case 7:		//Active Villian State
 			state = 3;
 			break;
 		}

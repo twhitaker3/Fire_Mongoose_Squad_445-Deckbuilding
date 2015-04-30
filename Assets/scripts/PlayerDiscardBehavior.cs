@@ -25,6 +25,7 @@ public class PlayerDiscardBehavior : MonoBehaviour {
 			case 0:		//Hand State
 				break;
 			case 1:		//Deck State
+				ShuffleIntoDeck();
 				break;
 			case 2:		//Played State
 				break;
@@ -34,5 +35,23 @@ public class PlayerDiscardBehavior : MonoBehaviour {
 	public void AddCard(GameObject card){
 		cards.Add(card);
 		length++;
+		Transform t = card.GetComponent<Transform>();
+		Vector3 vec = new Vector3(GetComponent<Transform>().position.x, GetComponent<Transform>().position.y,(float)(length*-.01));
+		t.position = vec;
+	}
+	public void ShuffleIntoDeck(){
+		PlayerDeckBehavior deck = player_deck.GetComponent<PlayerDeckBehavior>();
+		for(int i = 0; i < length; i++){
+			CardBehavior c = cards[i].GetComponent<CardBehavior>();
+			c.ShowBack();
+			c.state = 1;
+			deck.AddCard(cards[i]);
+
+			Transform t = c.GetComponent<Transform>();
+			t.position = deck.GetComponent<Transform>().position;
+		}
+		length = 0;
+		cards.Clear ();
+		deck.Shuffle ();
 	}
 }

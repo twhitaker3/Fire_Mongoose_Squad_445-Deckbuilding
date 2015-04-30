@@ -10,12 +10,6 @@ public class MainDeckBehavior : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Shuffle ();
-		for (int i = 0; i < length; i++) {
-			CardBehavior c = cards[i].GetComponent<CardBehavior>();
-			Transform t1 = c.GetComponent<Transform>();
-			Vector2 vec = new Vector2(GetComponent<Transform>().position.x, GetComponent<Transform>().position.y);
-			t1.position = vec;
-		}
 	}
 	
 	// Update is called once per frame
@@ -41,11 +35,6 @@ public class MainDeckBehavior : MonoBehaviour {
 				cards.RemoveAt(i);
 				length--;
 				i--;
-				
-				Transform t2 = c.GetComponent<Transform>();
-				Vector2 vec= z.GetComponent<Transform>().position;
-				vec.x = vec.x + (z.length-1)*3;
-				t2.position = vec;
 				break;
 			}
 		}
@@ -53,6 +42,9 @@ public class MainDeckBehavior : MonoBehaviour {
 	public void AddCard(GameObject card){
 		cards.Add(card);
 		length++;
+		Transform t = card.GetComponent<Transform>();
+		Vector2 vec= GetComponent<Transform>().position;
+		t.position = vec;
 	}
 	public void Shuffle(){
 		for (int i = 0; i < length; i++) {
@@ -60,6 +52,10 @@ public class MainDeckBehavior : MonoBehaviour {
 			GameObject t = cards[r];
 			cards[r] = cards[i];
 			cards[i] = t;
+			
+			Transform ti = cards[i].GetComponent<Transform>();
+			Vector3 vec = new Vector3(GetComponent<Transform>().position.x, GetComponent<Transform>().position.y,(float)(i*.01));
+			ti.position = vec;
 		}
 	}
 }

@@ -37,9 +37,7 @@ public class PlayerHandBehavior : MonoBehaviour {
 				cards.RemoveAt(i);
 				length--;
 				i--;
-
-				Transform t1 = c.GetComponent<Transform>();
-				t1.position = d.GetComponent<Transform>().position;
+				FixSprites();
 				break;
 			case 2:		//Played State
 				c.ShowFront();
@@ -48,11 +46,7 @@ public class PlayerHandBehavior : MonoBehaviour {
 				cards.RemoveAt(i);
 				length--;
 				i--;
-				
-				Transform t2 = c.GetComponent<Transform>();
-				Vector2 vec= z.GetComponent<Transform>().position;
-				vec.x = vec.x + (z.length-1)*3;
-				t2.position = vec;
+				FixSprites();
 				break;
 			case 3:
 				break;
@@ -62,5 +56,17 @@ public class PlayerHandBehavior : MonoBehaviour {
 	public void AddCard(GameObject card){
 		cards.Add(card);
 		length++;
+		Transform t = card.GetComponent<Transform>();
+		Vector2 vec= GetComponent<Transform>().position;
+		vec.x = vec.x + (length-1)*3;
+		t.position = vec;
+	}
+	public void FixSprites(){
+		for (int i = 0; i < length; i++) {
+			Transform t = cards[i].GetComponent<Transform>();
+			Vector2 vec = GetComponent<Transform>().position;
+			vec.x = vec.x + (i)*3;
+			t.position = vec;
+		}
 	}
 }
