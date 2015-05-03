@@ -28,6 +28,13 @@ public class PlayerDiscardBehavior : MonoBehaviour {
 				ShuffleIntoDeck();
 				break;
 			case 2:		//Played State
+				c.ShowFront();
+				PlayedZoneBehavior z = played_zone.GetComponent<PlayedZoneBehavior>();
+				z.AddCard(cards[i]);
+				cards.RemoveAt(i);
+				length--;
+				i--;
+				FixSprites();
 				break;
 			}
 		}
@@ -53,5 +60,14 @@ public class PlayerDiscardBehavior : MonoBehaviour {
 		length = 0;
 		cards.Clear ();
 		deck.Shuffle ();
+	}
+	
+	public void FixSprites(){
+		for (int i = 0; i < length; i++) {
+			Transform t = cards[i].GetComponent<Transform>();
+			Vector2 vec = GetComponent<Transform>().position;
+			vec.x = vec.x + (i)*3;
+			t.position = vec;
+		}
 	}
 }

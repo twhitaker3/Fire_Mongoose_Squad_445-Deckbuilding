@@ -48,7 +48,14 @@ public class PlayerHandBehavior : MonoBehaviour {
 				i--;
 				FixSprites();
 				break;
-			case 3:
+			case 3:		// Discard State
+				c.ShowFront();
+				PlayerDiscardBehavior discard = player_discard.GetComponent<PlayerDiscardBehavior>();
+				discard.AddCard(cards[i]);
+				cards.RemoveAt(i);
+				length--;
+				i--;
+				FixSprites();
 				break;
 			}
 		}
