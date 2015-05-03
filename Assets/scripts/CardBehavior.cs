@@ -7,7 +7,9 @@ public class CardBehavior : MonoBehaviour {
 	public bool face_down; 		//0 for face up card, 1 for face down card
 	public Sprite back_face;	//Backside image
 	public Sprite front_face;		//Array of all frontside images for a card
-
+	public bool menu;
+	public float menu_x;
+	public float menu_y;
 	SpriteRenderer spriteRenderer; //For drawing the card
 	float x; //used for drag/drop
 	float y; //used for drag/drop
@@ -40,7 +42,10 @@ public class CardBehavior : MonoBehaviour {
 			state = 2;
 			break;
 		case 1:		//Deck State
-			state = 0;
+			menu = true;
+			menu_x = Input.mousePosition.x;
+			menu_y = Input.mousePosition.y;
+			//state = 0;
 			break;
 		case 2:		//Played State
 			state = 3;
@@ -64,5 +69,19 @@ public class CardBehavior : MonoBehaviour {
 	public void onMouseDrag(){
 		transform.position = Camera.main.ScreenToWorldPoint(new Vector3(x,y,10.0f)); //nonfunctional currently
 			//should be able to drag/drop
+	}
+	public void OnGUI(){
+		if (menu) {
+			print ("Menu");
+			switch(state){
+			case 1:
+				print ("Menu 1");
+				if(GUI.Button(new Rect(menu_x, Screen.height - menu_y, 100,20),"Draw Card")){
+					state = 0;
+					menu = false;
+				}
+				break;
+			}
+		}
 	}
 }
