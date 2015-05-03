@@ -5,6 +5,7 @@ public class PlayedZoneBehavior : MonoBehaviour {
 
 	public List<GameObject> cards;
 	public int length;
+	public int power;
 	//Variables for other game entities
 	public GameObject player_deck;
 	public GameObject player_hand;
@@ -46,6 +47,9 @@ public class PlayedZoneBehavior : MonoBehaviour {
 		Vector2 vec= GetComponent<Transform>().position;
 		vec.x = vec.x + (length-1)*3;
 		t.position = vec;
+		for (int i = 0; i < length; i++) {
+			power += cards[i].GetComponent<CardAttributes>().power;
+		}
 	}
 	public void FixSprites(){
 		for (int i = 0; i < length; i++) {
