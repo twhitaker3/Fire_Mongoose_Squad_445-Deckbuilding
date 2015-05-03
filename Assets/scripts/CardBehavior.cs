@@ -7,9 +7,9 @@ public class CardBehavior : MonoBehaviour {
 	public bool face_down; 		//0 for face up card, 1 for face down card
 	public Sprite back_face;	//Backside image
 	public Sprite front_face;		//Array of all frontside images for a card
-	public bool menu;
-	public float menu_x;
-	public float menu_y;
+	private bool menu;
+	private float menu_x;
+	private float menu_y;
 	SpriteRenderer spriteRenderer; //For drawing the card
 	float x; //used for drag/drop
 	float y; //used for drag/drop
