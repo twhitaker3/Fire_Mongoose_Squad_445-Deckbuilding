@@ -9,6 +9,7 @@ public class PlayerHandBehavior : MonoBehaviour {
 	public GameObject player_deck;
 	public GameObject played_zone;
 	public GameObject player_discard;
+	public GameObject destroyed_zone;
 	// Use this for initialization
 	void Start () {
 		for (int i = 0; i < length; i++) {
@@ -52,6 +53,15 @@ public class PlayerHandBehavior : MonoBehaviour {
 				c.ShowFront();
 				PlayerDiscardBehavior discard = player_discard.GetComponent<PlayerDiscardBehavior>();
 				discard.AddCard(cards[i]);
+				cards.RemoveAt(i);
+				length--;
+				i--;
+				FixSprites();
+				break;
+			case 8:
+				c.ShowFront();
+				DestroyedStackBehavior destroyed = destroyed_zone.GetComponent<DestroyedStackBehavior>();
+				destroyed.AddCard(cards[i]);
 				cards.RemoveAt(i);
 				length--;
 				i--;

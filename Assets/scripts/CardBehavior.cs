@@ -36,43 +36,14 @@ public class CardBehavior : MonoBehaviour {
 	}
 	//Change the state of the card based on clicks
 	public void OnMouseDown(){
-		// print ("Clicked");
-		// switch (state) {
-		// case 0:		//Hand State
-			if (!menu) {
-				menu = true;
-				menu_x = Input.mousePosition.x;
-				menu_y = Input.mousePosition.y;
-			}
-			else {
-				menu = false;
-			}
-			//state = 2;
-			// break;
-		// case 1:		//Deck State
-			// menu = true;
-			// menu_x = Input.mousePosition.x;
-			// menu_y = Input.mousePosition.y;
-			// //state = 0;
-			// break;
-		// case 2:		//Played State
-			// state = 3;
-			// break;
-		// case 3:		//Discard State
-			// state = 1;
-			// break;
-		// case 4:		//Main Deck State
-			// state = 5;
-			// break;
-		// case 5:		//Line Up State
-			// state = 3;
-			// break;
-		// case 6:		//Villian Deck State
-			// break;
-		// case 7:		//Active Villian State
-			// state = 3;
-			// break;
-		// }
+		if (!menu) {
+			menu = true;
+			menu_x = Input.mousePosition.x;
+			menu_y = Input.mousePosition.y;
+		}
+		else {
+			menu = false;
+		}
 	}
 	public void onMouseDrag(){
 		transform.position = Camera.main.ScreenToWorldPoint(new Vector3(x,y,10.0f)); //nonfunctional currently
@@ -91,6 +62,10 @@ public class CardBehavior : MonoBehaviour {
 					state = 3;
 					menu = false;
 				}
+				if(GUI.Button(new Rect(menu_x, (Screen.height - menu_y)+40, 100, 20), "Destroy Card")){
+					state = 8;
+					menu = false;
+				}
 				break;
 			case 1: // Player Deck
 				// print ("Menu 1");
@@ -100,13 +75,13 @@ public class CardBehavior : MonoBehaviour {
 				}
 				break;
 			case 2: // Played Zone
-				if(GUI.Button(new Rect(menu_x, Screen.height - menu_y, 100,20), "Discard Card")){
+				if(GUI.Button(new Rect(menu_x, Screen.height - menu_y, 100,20), "Send to discard")){
 					state = 3;
 					menu = false;
 				}
 				break;	
 			case 3: // Discard
-				if(GUI.Button(new Rect(menu_x, Screen.height - menu_y, 100,20), "Move to Deck")){
+				if(GUI.Button(new Rect(menu_x, Screen.height - menu_y, 100,20), "Shuffle into Deck")){
 					state = 1;
 					menu = false;
 				}
@@ -122,7 +97,7 @@ public class CardBehavior : MonoBehaviour {
 				}
 				break;
 			case 5: // Line Up
-				if(GUI.Button(new Rect(menu_x, Screen.height - menu_y, 100,20), "Discard Card")){
+				if(GUI.Button(new Rect(menu_x, Screen.height - menu_y, 100,20), "Buy Card")){
 					state = 3;
 					menu = false;
 				}
@@ -131,7 +106,7 @@ public class CardBehavior : MonoBehaviour {
 				menu = false;
 				break;
 			case 7: // Active Villian
-				if(GUI.Button(new Rect(menu_x, Screen.height - menu_y, 100,20), "Discard Card")){
+				if(GUI.Button(new Rect(menu_x, Screen.height - menu_y, 100,20), "Defeat Villian")){
 					state = 3;
 					menu = false;
 				}
