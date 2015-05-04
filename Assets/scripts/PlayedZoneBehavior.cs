@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class PlayedZoneBehavior : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class PlayedZoneBehavior : MonoBehaviour {
 	public GameObject player_deck;
 	public GameObject player_hand;
 	public GameObject player_discard;
+	public Text power_count;
 	// Use this for initialization
 	void Start () {
 	
@@ -47,9 +49,9 @@ public class PlayedZoneBehavior : MonoBehaviour {
 		Vector2 vec= GetComponent<Transform>().position;
 		vec.x = vec.x + (length-1)*3;
 		t.position = vec;
-		for (int i = 0; i < length; i++) {
-			power += cards[i].GetComponent<CardAttributes>().power;
-		}
+		power += card.GetComponent<CardAttributes> ().power;
+		power_count.text = "Power: " + power;
+
 	}
 	public void FixSprites(){
 		for (int i = 0; i < length; i++) {
